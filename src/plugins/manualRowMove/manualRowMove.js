@@ -155,10 +155,13 @@ function ManualRowMove() {
         hideHandleAndGuide();
         pressed = false;
 
+        var shouldProcessMove = Handsontable.hooks.run(instance, 'beforeRowMove', startRow, endRow);
+        if (!shouldProcessMove) {
+          endRow = startRow;
+        }
+
         createPositionData(instance.manualRowPositions, instance.countRows());
         instance.manualRowPositions.splice(endRow, 0, instance.manualRowPositions.splice(startRow, 1)[0]);
-
-        Handsontable.hooks.run(instance, 'beforeRowMove', startRow, endRow);
 
         instance.forceFullRender = true;
         instance.view.render(); // updates all
