@@ -193,6 +193,8 @@ function CopyPastePlugin(instance) {
     let dataSet = [];
     let copyableRows = [];
     let copyableColumns = [];
+    let copyableColumnHeaders = [];
+    let columnHeaders = instance.getColHeader();
 
     // Count all copyable rows and columns
     arrayEach(ranges, (range) => {
@@ -204,6 +206,7 @@ function CopyPastePlugin(instance) {
       rangeEach(range.startCol, range.endCol, (column) => {
         if (copyableColumns.indexOf(column) === -1) {
           copyableColumns.push(column);
+          copyableColumnHeaders.push(columnHeaders[column])
         }
       });
     });
@@ -217,6 +220,7 @@ function CopyPastePlugin(instance) {
 
       dataSet.push(rowSet);
     });
+    dataSet.unshift(copyableColumnHeaders);
 
     return SheetClip.stringify(dataSet);
   };
