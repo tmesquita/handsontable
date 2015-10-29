@@ -1340,6 +1340,7 @@ Handsontable.Core = function Core(rootElement, userSettings) {
    * @fires Hooks#afterChange
    */
   this.loadData = function(data) {
+    Handsontable.hooks.run(instance, 'beforeLoadData');
     if (typeof data === 'object' && data !== null) {
       if (!(data.push && data.splice)) { // check if data is array. Must use duck-type check so Backbone Collections also pass it
         // when data is not an array, attempt to make a single-row array of it

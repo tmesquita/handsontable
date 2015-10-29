@@ -180,6 +180,14 @@ const REGISTERED_HOOKS = [
    */
   'afterIsMultipleSelectionCheck',
 
+
+  /**
+   * Callback fired after new data is loaded (by `loadData` method) into the data source array.
+   *
+   * @event Hooks#beforeLoadData
+   */
+  'beforeLoadData',
+
   /**
    * Callback fired after new data is loaded (by `loadData` method) into the data source array.
    *
