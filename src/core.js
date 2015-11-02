@@ -2027,7 +2027,7 @@ Handsontable.Core = function Core(rootElement, userSettings) {
     extend(cellProperties, expandType(cellProperties)); // for `type` added in beforeGetCellMeta
 
     if (cellProperties.cells) {
-      var settings = cellProperties.cells.call(cellProperties, row, col, prop);
+      var settings = cellProperties.cells.call(cellProperties, row, col, prop, instance);
 
       if (settings) {
         extend(cellProperties, settings);
