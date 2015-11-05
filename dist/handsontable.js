@@ -7,13 +7,13 @@
  * Licensed under the MIT license.
  * http://handsontable.com/
  *
- * Date: Mon Nov 02 2015 11:34:23 GMT-0500 (EST)
+ * Date: Thu Nov 05 2015 10:41:34 GMT-0500 (EST)
  */
 /*jslint white: true, browser: true, plusplus: true, indent: 4, maxerr: 50 */
 
 window.Handsontable = {
   version: '0.19.0',
-  buildDate: 'Mon Nov 02 2015 11:34:23 GMT-0500 (EST)',
+  buildDate: 'Thu Nov 05 2015 10:41:34 GMT-0500 (EST)',
 };
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Handsontable = f()}})(function(){var define,module,exports;return (function init(modules, cache, entry) {
   (function outer (modules, cache, entry) {
@@ -8132,11 +8132,13 @@ Object.defineProperties(exports, {
   __esModule: {value: true}
 });
 var $__helpers_47_dom_47_element__,
-    $__helpers_47_browser__;
+    $__helpers_47_browser__,
+    $__helpers_47_dom_47_event__;
 var $__0 = ($__helpers_47_dom_47_element__ = require("helpers/dom/element"), $__helpers_47_dom_47_element__ && $__helpers_47_dom_47_element__.__esModule && $__helpers_47_dom_47_element__ || {default: $__helpers_47_dom_47_element__}),
     polymerWrap = $__0.polymerWrap,
     closest = $__0.closest;
 var isWebComponentSupportedNatively = ($__helpers_47_browser__ = require("helpers/browser"), $__helpers_47_browser__ && $__helpers_47_browser__.__esModule && $__helpers_47_browser__ || {default: $__helpers_47_browser__}).isWebComponentSupportedNatively;
+var _stopImmediatePropagation = ($__helpers_47_dom_47_event__ = require("helpers/dom/event"), $__helpers_47_dom_47_event__ && $__helpers_47_dom_47_event__.__esModule && $__helpers_47_dom_47_event__ || {default: $__helpers_47_dom_47_event__}).stopImmediatePropagation;
 var EventManager = function EventManager() {
   var context = arguments[0] !== (void 0) ? arguments[0] : null;
   this.context = context || this;
@@ -8146,7 +8148,7 @@ var EventManager = function EventManager() {
 };
 ($traceurRuntime.createClass)(EventManager, {
   addEventListener: function(element, eventName, callback) {
-    var $__2 = this;
+    var $__3 = this;
     var context = this.context;
     function callbackProxy(event) {
       if (event.target == void 0 && event.srcElement != void 0) {
@@ -8183,7 +8185,7 @@ var EventManager = function EventManager() {
     }
     Handsontable.countEventManagerListeners++;
     return (function() {
-      $__2.removeEventListener(element, eventName, callback);
+      $__3.removeEventListener(element, eventName, callback);
     });
   },
   removeEventListener: function(element, eventName, callback) {
@@ -8262,8 +8264,14 @@ function extendEvent(context, event) {
   var realTarget;
   var target;
   var len;
+  var nativeStopImmediatePropagation;
   event.isTargetWebComponent = false;
   event.realTarget = event.target;
+  nativeStopImmediatePropagation = event.stopImmediatePropagation;
+  event.stopImmediatePropagation = function() {
+    nativeStopImmediatePropagation.apply(this);
+    _stopImmediatePropagation(this);
+  };
   if (!Handsontable.eventManager.isHotTableEnv) {
     return event;
   }
@@ -8317,7 +8325,7 @@ function eventManager(context) {
 }
 
 //# 
-},{"helpers/browser":42,"helpers/dom/element":44}],41:[function(require,module,exports){
+},{"helpers/browser":42,"helpers/dom/element":44,"helpers/dom/event":45}],41:[function(require,module,exports){
 "use strict";
 Object.defineProperties(exports, {
   to2dArray: {get: function() {
