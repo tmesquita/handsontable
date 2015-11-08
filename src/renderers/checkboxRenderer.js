@@ -42,7 +42,7 @@ function checkboxRenderer(instance, TD, row, col, prop, value, cellProperties) {
   } else if (value === cellProperties.uncheckedTemplate || equalsIgnoreCase(value, cellProperties.uncheckedTemplate)) {
     input.checked = false;
 
-  } else if (value === null) { // default value
+  } else if (value == null) { // default value
     addClass(input, 'noValue');
 
   } else {
