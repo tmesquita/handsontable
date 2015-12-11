@@ -237,7 +237,8 @@ function CopyPastePlugin(instance) {
 
       dataSet.push(rowSet);
     });
-    dataSet.unshift(copyableColumnHeaders);
+    // TODO: come up with more intelligent way on when to add column headers into copied data
+    // dataSet.unshift(copyableColumnHeaders);
 
     return SheetClip.stringify(dataSet);
   };
