@@ -4228,11 +4228,7 @@ var domHelpers = ($__helpers_47_dom_47_element__ = _dereq_("helpers/dom/element"
 var domEventHelpers = ($__helpers_47_dom_47_event__ = _dereq_("helpers/dom/event"), $__helpers_47_dom_47_event__ && $__helpers_47_dom_47_event__.__esModule && $__helpers_47_dom_47_event__ || {default: $__helpers_47_dom_47_event__});
 var HELPERS = [arrayHelpers, browserHelpers, dataHelpers, dateHelpers, featureHelpers, functionHelpers, mixedHelpers, numberHelpers, objectHelpers, settingHelpers, stringHelpers, unicodeHelpers];
 var DOM = [domHelpers, domEventHelpers];
-<<<<<<< HEAD
-Handsontable.buildDate = 'Wed Apr 20 2016 18:48:46 GMT-0400 (EDT)';
-=======
-Handsontable.buildDate = 'Mon Apr 11 2016 14:03:53 GMT+0200 (CEST)';
->>>>>>> 8f3ce9870744713f6561bd0f0d8375316b9cab10
+Handsontable.buildDate = 'Thu Apr 21 2016 10:20:21 GMT-0400 (EDT)';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '0.24.2';
 var baseVersion = '@@baseVersion';
@@ -8996,16 +8992,6 @@ Object.defineProperties(exports, {
     }},
   __esModule: {value: true}
 });
-<<<<<<< HEAD
-var $__helpers_47_dom_47_element__,
-    $__helpers_47_browser__,
-    $__helpers_47_dom_47_event__;
-var $__0 = ($__helpers_47_dom_47_element__ = require("helpers/dom/element"), $__helpers_47_dom_47_element__ && $__helpers_47_dom_47_element__.__esModule && $__helpers_47_dom_47_element__ || {default: $__helpers_47_dom_47_element__}),
-    polymerWrap = $__0.polymerWrap,
-    closest = $__0.closest;
-var isWebComponentSupportedNatively = ($__helpers_47_browser__ = require("helpers/browser"), $__helpers_47_browser__ && $__helpers_47_browser__.__esModule && $__helpers_47_browser__ || {default: $__helpers_47_browser__}).isWebComponentSupportedNatively;
-var _stopImmediatePropagation = ($__helpers_47_dom_47_event__ = require("helpers/dom/event"), $__helpers_47_dom_47_event__ && $__helpers_47_dom_47_event__.__esModule && $__helpers_47_dom_47_event__ || {default: $__helpers_47_dom_47_event__}).stopImmediatePropagation;
-=======
 var $__browser__,
     $__helpers_47_dom_47_element__,
     $__helpers_47_feature__,
@@ -9016,7 +9002,6 @@ var $__1 = ($__helpers_47_dom_47_element__ = _dereq_("helpers/dom/element"), $__
     closest = $__1.closest;
 var isWebComponentSupportedNatively = ($__helpers_47_feature__ = _dereq_("helpers/feature"), $__helpers_47_feature__ && $__helpers_47_feature__.__esModule && $__helpers_47_feature__ || {default: $__helpers_47_feature__}).isWebComponentSupportedNatively;
 var _stopImmediatePropagation = ($__helpers_47_dom_47_event__ = _dereq_("helpers/dom/event"), $__helpers_47_dom_47_event__ && $__helpers_47_dom_47_event__.__esModule && $__helpers_47_dom_47_event__ || {default: $__helpers_47_dom_47_event__}).stopImmediatePropagation;
->>>>>>> 8f3ce9870744713f6561bd0f0d8375316b9cab10
 var EventManager = function EventManager() {
   var context = arguments[0] !== (void 0) ? arguments[0] : null;
   this.context = context || this;
@@ -9026,11 +9011,7 @@ var EventManager = function EventManager() {
 };
 ($traceurRuntime.createClass)(EventManager, {
   addEventListener: function(element, eventName, callback) {
-<<<<<<< HEAD
-    var $__3 = this;
-=======
     var $__4 = this;
->>>>>>> 8f3ce9870744713f6561bd0f0d8375316b9cab10
     var context = this.context;
     function callbackProxy(event) {
       if (event.target == void 0 && event.srcElement != void 0) {
@@ -9067,11 +9048,7 @@ var EventManager = function EventManager() {
     }
     Handsontable.countEventManagerListeners++;
     return (function() {
-<<<<<<< HEAD
-      $__3.removeEventListener(element, eventName, callback);
-=======
       $__4.removeEventListener(element, eventName, callback);
->>>>>>> 8f3ce9870744713f6561bd0f0d8375316b9cab10
     });
   },
   removeEventListener: function(element, eventName, callback) {
@@ -9210,11 +9187,7 @@ function eventManager(context) {
 }
 
 //# 
-<<<<<<< HEAD
-},{"helpers/browser":43,"helpers/dom/element":45,"helpers/dom/event":46}],42:[function(require,module,exports){
-=======
 },{"browser":23,"helpers/dom/element":46,"helpers/dom/event":47,"helpers/feature":48}],42:[function(_dereq_,module,exports){
->>>>>>> 8f3ce9870744713f6561bd0f0d8375316b9cab10
 "use strict";
 Object.defineProperties(exports, {
   to2dArray: {get: function() {
@@ -11206,15 +11179,9 @@ Object.defineProperties(exports, {
 });
 var $__helpers_47_array__,
     $__helpers_47_object__;
-<<<<<<< HEAD
-var REGISTERED_HOOKS = ['afterCellMetaReset', 'afterChange', 'afterChangesObserved', 'afterContextMenuDefaultOptions', 'afterContextMenuHide', 'afterContextMenuShow', 'afterCopyLimit', 'afterCreateCol', 'afterCreateRow', 'afterDeselect', 'afterDestroy', 'afterDocumentKeyDown', 'afterGetCellMeta', 'afterGetColHeader', 'afterGetRowHeader', 'afterInit', 'afterIsMultipleSelectionCheck', 'beforeLoadData', 'afterLoadData', 'afterMomentumScroll', 'afterOnCellCornerMouseDown', 'afterOnCellMouseDown', 'afterOnCellMouseOver', 'afterRemoveCol', 'afterRemoveRow', 'afterRender', 'afterRenderer', 'afterScrollHorizontally', 'afterScrollVertically', 'afterSelection', 'afterSelectionByProp', 'afterSelectionEnd', 'afterSelectionEndByProp', 'afterSetCellMeta', 'afterUpdateSettings', 'afterValidate', 'beforeAutofill', 'beforeCellAlignment', 'beforeChange', 'beforeChangeRender', 'beforeDrawBorders', 'beforeGetCellMeta', 'beforeInit', 'beforeInitWalkontable', 'beforeKeyDown', 'beforeOnCellMouseDown', 'beforeRemoveCol', 'beforeRemoveRow', 'beforeRender', 'beforeSetRangeEnd', 'beforeTouchScroll', 'beforeValidate', 'construct', 'init', 'modifyCol', 'modifyColHeader', 'modifyColWidth', 'modifyRow', 'modifyRowHeader', 'modifyRowHeight', 'persistentStateLoad', 'persistentStateReset', 'persistentStateSave', 'beforeColumnSort', 'afterColumnSort', 'afterAutofillApplyValues', 'modifyCopyableRange', 'beforeColumnMove', 'afterColumnMove', 'beforeRowMove', 'afterRowMove', 'beforeColumnResize', 'afterColumnResize', 'beforeRowResize', 'afterRowResize', 'afterGetColumnHeaderRenderers', 'afterGetRowHeaderRenderers', 'beforeStretchingColumnWidth'];
-var arrayEach = ($__helpers_47_array__ = require("helpers/array"), $__helpers_47_array__ && $__helpers_47_array__.__esModule && $__helpers_47_array__ || {default: $__helpers_47_array__}).arrayEach;
-var objectEach = ($__helpers_47_object__ = require("helpers/object"), $__helpers_47_object__ && $__helpers_47_object__.__esModule && $__helpers_47_object__ || {default: $__helpers_47_object__}).objectEach;
-=======
-var REGISTERED_HOOKS = ['afterCellMetaReset', 'afterChange', 'afterChangesObserved', 'afterContextMenuDefaultOptions', 'afterContextMenuHide', 'afterContextMenuShow', 'afterCopyLimit', 'afterCreateCol', 'afterCreateRow', 'afterDeselect', 'afterDestroy', 'afterDocumentKeyDown', 'afterGetCellMeta', 'afterGetColHeader', 'afterGetRowHeader', 'afterInit', 'afterLoadData', 'afterMomentumScroll', 'afterOnCellCornerMouseDown', 'afterOnCellMouseDown', 'afterOnCellMouseOver', 'afterRemoveCol', 'afterRemoveRow', 'afterRender', 'beforeRenderer', 'afterRenderer', 'afterScrollHorizontally', 'afterScrollVertically', 'afterSelection', 'afterSelectionByProp', 'afterSelectionEnd', 'afterSelectionEndByProp', 'afterSetCellMeta', 'afterUpdateSettings', 'afterValidate', 'beforeAutofill', 'beforeCellAlignment', 'beforeChange', 'beforeChangeRender', 'beforeDrawBorders', 'beforeGetCellMeta', 'beforeInit', 'beforeInitWalkontable', 'beforeKeyDown', 'beforeOnCellMouseDown', 'beforeRemoveCol', 'beforeRemoveRow', 'beforeRender', 'beforeSetRangeEnd', 'beforeTouchScroll', 'beforeValidate', 'construct', 'init', 'modifyCol', 'unmodifyCol', 'modifyColHeader', 'modifyColWidth', 'modifyRow', 'modifyRowHeader', 'modifyRowHeight', 'persistentStateLoad', 'persistentStateReset', 'persistentStateSave', 'beforeColumnSort', 'afterColumnSort', 'afterAutofillApplyValues', 'modifyCopyableRange', 'beforeColumnMove', 'afterColumnMove', 'beforeRowMove', 'afterRowMove', 'beforeColumnResize', 'afterColumnResize', 'beforeRowResize', 'afterRowResize', 'afterGetColumnHeaderRenderers', 'afterGetRowHeaderRenderers', 'beforeStretchingColumnWidth', 'beforeFilter', 'afterFilter'];
+var REGISTERED_HOOKS = ['afterCellMetaReset', 'afterChange', 'afterChangesObserved', 'afterContextMenuDefaultOptions', 'afterContextMenuHide', 'afterContextMenuShow', 'afterCopyLimit', 'afterCreateCol', 'afterCreateRow', 'afterDeselect', 'afterDestroy', 'afterDocumentKeyDown', 'afterGetCellMeta', 'afterGetColHeader', 'afterGetRowHeader', 'afterInit', 'afterIsMultipleSelectionCheck', 'beforeLoadData', 'afterLoadData', 'afterMomentumScroll', 'afterOnCellCornerMouseDown', 'afterOnCellMouseDown', 'afterOnCellMouseOver', 'afterRemoveCol', 'afterRemoveRow', 'afterRender', 'beforeRenderer', 'afterRenderer', 'afterScrollHorizontally', 'afterScrollVertically', 'afterSelection', 'afterSelectionByProp', 'afterSelectionEnd', 'afterSelectionEndByProp', 'afterSetCellMeta', 'afterUpdateSettings', 'afterValidate', 'beforeAutofill', 'beforeCellAlignment', 'beforeChange', 'beforeChangeRender', 'beforeDrawBorders', 'beforeGetCellMeta', 'beforeInit', 'beforeInitWalkontable', 'beforeKeyDown', 'beforeOnCellMouseDown', 'beforeRemoveCol', 'beforeRemoveRow', 'beforeRender', 'beforeSetRangeEnd', 'beforeTouchScroll', 'beforeValidate', 'construct', 'init', 'modifyCol', 'unmodifyCol', 'modifyColHeader', 'modifyColWidth', 'modifyRow', 'modifyRowHeader', 'modifyRowHeight', 'persistentStateLoad', 'persistentStateReset', 'persistentStateSave', 'beforeColumnSort', 'afterColumnSort', 'afterAutofillApplyValues', 'modifyCopyableRange', 'beforeColumnMove', 'afterColumnMove', 'beforeRowMove', 'afterRowMove', 'beforeColumnResize', 'afterColumnResize', 'beforeRowResize', 'afterRowResize', 'afterGetColumnHeaderRenderers', 'afterGetRowHeaderRenderers', 'beforeStretchingColumnWidth', 'beforeFilter', 'afterFilter'];
 var arrayEach = ($__helpers_47_array__ = _dereq_("helpers/array"), $__helpers_47_array__ && $__helpers_47_array__.__esModule && $__helpers_47_array__ || {default: $__helpers_47_array__}).arrayEach;
 var objectEach = ($__helpers_47_object__ = _dereq_("helpers/object"), $__helpers_47_object__ && $__helpers_47_object__.__esModule && $__helpers_47_object__ || {default: $__helpers_47_object__}).objectEach;
->>>>>>> 8f3ce9870744713f6561bd0f0d8375316b9cab10
 var Hooks = function Hooks() {
   this.globalBucket = this.createEmptyBucket();
 };
@@ -16709,72 +16676,11 @@ var $ManualRowMove = ManualRowMove;
       }
     }
     return null;
-<<<<<<< HEAD
-  };
-  var bindEvents = function() {
-    var instance = this;
-    var pressed;
-    eventManager.addEventListener(instance.rootElement, 'mouseover', function(e) {
-      if (checkRowHeader.call(instance, e.target)) {
-        var th = getTHFromTargetElement(e.target);
-        if (th) {
-          if (pressed) {
-            endRow = instance.view.wt.wtTable.getCoords(th).row;
-            refreshHandlePosition(th, endRow - startRow);
-          } else {
-            setupHandlePosition.call(instance, th);
-          }
-        }
-      }
-    });
-    eventManager.addEventListener(instance.rootElement, 'mousedown', function(e) {
-      if (hasClass(e.target, 'manualRowMover')) {
-        startY = pageY(e);
-        setupGuidePosition.call(instance);
-        pressed = instance;
-        startRow = currentRow;
-        endRow = currentRow;
-      }
-    });
-    eventManager.addEventListener(window, 'mousemove', function(e) {
-      if (pressed) {
-        refreshGuidePosition(pageY(e) - startY);
-      }
-    });
-    eventManager.addEventListener(window, 'mouseup', function(e) {
-      if (pressed) {
-        hideHandleAndGuide();
-        pressed = false;
-        var shouldProcessMove = Handsontable.hooks.run(instance, 'beforeRowMove', startRow, endRow);
-        if (!shouldProcessMove) {
-          endRow = startRow;
-        }
-        createPositionData(instance.manualRowPositions, instance.countRows());
-        instance.manualRowPositions.splice(endRow, 0, instance.manualRowPositions.splice(startRow, 1)[0]);
-        instance.forceFullRender = true;
-        instance.view.render();
-        saveManualRowPositions.call(instance);
-        Handsontable.hooks.run(instance, 'afterRowMove', startRow, endRow);
-        setupHandlePosition.call(instance, currentTH);
-      }
-    });
-    instance.addHook('afterDestroy', unbindEvents);
-  };
-  var unbindEvents = function() {
-    eventManager.clear();
-  };
-  var createPositionData = function(positionArr, len) {
-    if (positionArr.length < len) {
-      for (var i = positionArr.length; i < len; i++) {
-        positionArr[i] = i;
-      }
-=======
   },
   changeRowPositions: function(rowIndex, destinationIndex) {
     var maxLength = Math.max(rowIndex, destinationIndex);
     if (maxLength > this.rowPositions.length - 1) {
       this.createPositionData(maxLength + 1);
->>>>>>> 8f3ce9870744713f6561bd0f0d8375316b9cab10
     }
     this.rowPositions.splice(destinationIndex, 0, this.rowPositions.splice(rowIndex, 1)[0]);
   },
@@ -16822,9 +16728,12 @@ var $ManualRowMove = ManualRowMove;
     if (priv.pressed) {
       this.hideHandleAndGuide();
       priv.pressed = false;
+      var shouldProcessMove = Handsontable.hooks.run(this.hot, 'beforeRowMove', priv.startRow, priv.endRow);
+      if (!shouldProcessMove) {
+        priv.endRow = priv.startRow;
+      }
       this.createPositionData(this.hot.countRows());
       this.changeRowPositions(priv.startRow, priv.endRow);
-      Handsontable.hooks.run(this.hot, 'beforeRowMove', priv.startRow, priv.endRow);
       this.hot.forceFullRender = true;
       this.hot.view.render();
       this.saveManualRowPositions();
