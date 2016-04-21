@@ -1,3 +1,4 @@
+import Handsontable from './../browser';
 import {
     addClass,
     getCaretPosition,
@@ -294,7 +295,7 @@ TextEditor.prototype.refreshDimensions = function() {
   if (cssTransformOffset && cssTransformOffset != -1) {
     this.textareaParentStyle[cssTransformOffset[0]] = cssTransformOffset[1];
   } else {
-    resetCssTransform(this.textareaParentStyle);
+    resetCssTransform(this.TEXTAREA_PARENT);
   }
 
   this.textareaParentStyle.top = editTop + 'px';

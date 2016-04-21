@@ -1,6 +1,6 @@
-
+import Handsontable from './browser';
 import {polymerWrap, closest} from './helpers/dom/element';
-import {isWebComponentSupportedNatively} from './helpers/browser';
+import {isWebComponentSupportedNatively} from './helpers/feature';
 import {stopImmediatePropagation as _stopImmediatePropagation} from './helpers/dom/event';
 
 /**
@@ -273,7 +273,6 @@ function extendEvent(context, event) {
 
 export {EventManager, eventManager};
 
-window.Handsontable = window.Handsontable || {};
 // used to debug memory leaks
 Handsontable.countEventManagerListeners = 0;
 // support for older versions of Handsontable, deprecated

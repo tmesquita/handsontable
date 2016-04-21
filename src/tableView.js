@@ -1,3 +1,4 @@
+import Handsontable from './browser';
 import {
   addClass,
   empty,
@@ -215,7 +216,9 @@ function TableView(instance) {
     externalRowCalculator: this.instance.getPlugin('autoRowSize') && this.instance.getPlugin('autoRowSize').isEnabled(),
     table: table,
     preventOverflow: () => this.settings.preventOverflow,
-    stretchH: this.settings.stretchH,
+    stretchH: function() {
+      return that.settings.stretchH;
+    },
     data: instance.getDataAtCell,
     totalRows: () => instance.countRows(),
     totalColumns: () => instance.countCols(),
@@ -259,14 +262,12 @@ function TableView(instance) {
     columnWidth: instance.getColWidth,
     rowHeight: instance.getRowHeight,
     cellRenderer: function(row, col, TD) {
+      const cellProperties = that.instance.getCellMeta(row, col);
+      const prop = that.instance.colToProp(col);
+      const value = that.instance.getDataAtRowProp(row, prop);
 
-      var prop = that.instance.colToProp(col),
-        cellProperties = that.instance.getCellMeta(row, col),
-        renderer = that.instance.getCellRenderer(cellProperties);
-
-      var value = that.instance.getDataAtRowProp(row, prop);
-
-      renderer(that.instance, TD, row, col, prop, value, cellProperties);
+      Handsontable.hooks.run(that.instance, 'beforeRenderer', TD, row, col, prop, value, cellProperties);
+      that.instance.getCellRenderer(cellProperties)(that.instance, TD, row, col, prop, value, cellProperties);
       Handsontable.hooks.run(that.instance, 'afterRenderer', TD, row, col, prop, value, cellProperties);
 
     },

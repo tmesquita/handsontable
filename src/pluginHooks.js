@@ -283,10 +283,24 @@ const REGISTERED_HOOKS = [
   'afterRender',
 
   /**
+   * Fired before starting rendering the cell.
+   *
+   * @event Hooks#beforeRenderer
+   * @since 0.24.2
+   * @param {Element} TD Currently rendered cell's TD element.
+   * @param {Number} row Row index.
+   * @param {Number} col Column index.
+   * @param {String|Number} prop Column property name or a column index, if datasource is an array of arrays.
+   * @param {String} value Value of the rendered cell.
+   * @param {Object} cellProperties Object containing the cell's properties.
+   */
+  'beforeRenderer',
+
+  /**
    * Fired after finishing rendering the cell (after the renderer finishes).
    *
    * @event Hooks#afterRenderer
-   * @since 0.11
+   * @since 0.11.0
    * @param {Element} TD Currently rendered cell's TD element.
    * @param {Number} row Row index.
    * @param {Number} col Column index.
@@ -381,7 +395,7 @@ const REGISTERED_HOOKS = [
    * A plugin hook executed after validator function, only if validator function is defined.
    * Validation result is the first parameter. This can be used to determinate if validation passed successfully or not.
    *
-   * __You can cancel current change by returning false.__
+   * __Returning false from the callback will mark the cell as invalid.__
    *
    * @event Hooks#afterValidate
    * @since 0.9.5
@@ -539,6 +553,7 @@ const REGISTERED_HOOKS = [
    * @event Hooks#beforeRemoveCol
    * @param {Number} index Index of starter column.
    * @param {Number} amount Amount of columns to be removed.
+   * @param {Array} [logicalCols] Consists of logical indexes of processed columns.
    */
   'beforeRemoveCol',
 
@@ -548,6 +563,7 @@ const REGISTERED_HOOKS = [
    * @event Hooks#beforeRemoveRow
    * @param {Number} index Index of starter column.
    * @param {Number} amount Amount of columns to be removed.
+   * @param {Array} [logicalRows] Consists of logical indexes of processed rows.
    */
   'beforeRemoveRow',
 
@@ -615,6 +631,15 @@ const REGISTERED_HOOKS = [
    * @param {Number} col Column index.
    */
   'modifyCol',
+
+  /**
+   * Fired when a column index is about to be de-modified by a callback function.
+   *
+   * @event Hooks#unmodifyCol
+   * @since 0.23.0
+   * @param {Number} col Column index.
+   */
+    'unmodifyCol',
 
   /**
    * Fired when a column header index is about to be modified by a callback function.
@@ -840,6 +865,25 @@ const REGISTERED_HOOKS = [
    * @returns {Number} Returns new width which will be applied to the column element.
    */
   'beforeStretchingColumnWidth',
+
+  /**
+   * Fired before applying [filtering]{@link http://docs.handsontable.com/pro/demo-filtering.html}.
+   *
+   * @pro
+   * @event Hooks#beforeFilter
+   * @param {Array} formulasStack An array of objects with added formulas.
+   * @returns {Boolean} If hook returns `false` value then filtering won't be applied on the UI side (server-side filtering).
+   */
+  'beforeFilter',
+
+  /**
+   * Fired after applying [filtering]{@link http://docs.handsontable.com/pro/demo-filtering.html}.
+   *
+   * @pro
+   * @event Hooks#afterFilter
+   * @param {Array} formulasStack An array of objects with added formulas.
+   */
+  'afterFilter',
 ];
 
 import {arrayEach} from './helpers/array';
@@ -927,7 +971,7 @@ class Hooks {
    */
   add(key, callback, context = null) {
     if (Array.isArray(callback)) {
-      arrayEach(callback, (c) => (this.add(key, c, context)));
+      arrayEach(callback, (c) => this.add(key, c, context));
 
     } else {
       const bucket = this.getBucket(context);
@@ -952,7 +996,7 @@ class Hooks {
    *
    * @see Core#addHookOnce
    * @param {String} key Hook/Event name.
-   * @param {Function} callback Callback function.
+   * @param {Function|Array} callback Callback function.
    * @param {Object} [context=null] A Handsontable instance.
    *
    * @example
@@ -962,7 +1006,7 @@ class Hooks {
    */
   once(key, callback, context = null) {
     if (Array.isArray(callback)) {
-      arrayEach(callback, (c) => (this.once(key, c, context)));
+      arrayEach(callback, (c) => this.once(key, c, context));
 
     } else {
       callback.runOnce = true;
@@ -1179,7 +1223,3 @@ class Hooks {
 }
 
 export {Hooks};
-
-// temp for tests only!
-Handsontable.utils = Handsontable.utils || {};
-Handsontable.utils.Hooks = Hooks;

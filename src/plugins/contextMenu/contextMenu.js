@@ -1,4 +1,4 @@
-
+import Handsontable from './../../browser';
 import BasePlugin from './../_base';
 import {arrayEach} from './../../helpers/array';
 import {CommandExecutor} from './commandExecutor';
@@ -147,6 +147,16 @@ class ContextMenu extends BasePlugin {
       // Register all commands. Predefined and added by user or by plugins
       arrayEach(menuItems, (command) => this.commandExecutor.registerCommand(command.key, command));
     });
+  }
+
+  /**
+   * Update the plugin according to Handsontable settings.
+   */
+  updatePlugin() {
+    this.disablePlugin();
+    this.enablePlugin();
+
+    super.updatePlugin();
   }
 
   /**
