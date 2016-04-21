@@ -449,7 +449,7 @@ const REGISTERED_HOOKS = [
    * new Handsontable(document.getElementById('example'), {
    *   beforeChange: function(changes, source) {
    *     // [[row, prop, oldVal, newVal], ...]
-   *     changes[0][1] = 10;
+   *     changes[0][3] = 10;
    *   }
    * });
    * ...
@@ -690,7 +690,8 @@ const REGISTERED_HOOKS = [
   'persistentStateSave',
 
   /**
-   * Fired before sorting the column.
+   * Fired before sorting the column. If you return `false` value then sorting will be not applied by
+   * Handsontable (useful for server-side sorting).
    *
    * @event Hooks#beforeColumnSort
    * @param {Number} column Sorted column index.
@@ -813,6 +814,32 @@ const REGISTERED_HOOKS = [
    * @param {Boolean} isDoubleClick Flag that determines whether there was a double-click.
    */
   'afterRowResize',
+
+  /**
+   * Fired after getting the column header renderers.
+   *
+   * @event Hooks#afterGetColumnHeaderRenderers
+   * @param {Array} array Array of the column header renderers.
+   */
+  'afterGetColumnHeaderRenderers',
+
+  /**
+   * Fired after getting the row header renderers.
+   *
+   * @event Hooks#afterGetRowHeaderRenderers
+   * @param {Array} array Array of the row header renderers.
+   */
+  'afterGetRowHeaderRenderers',
+
+  /**
+   * Fired before applying stretched column width to column.
+   *
+   * @event Hooks#beforeStretchingColumnWidth
+   * @param {Number} stretchedWidth Calculated width.
+   * @param {Number} column Column index.
+   * @returns {Number} Returns new width which will be applied to the column element.
+   */
+  'beforeStretchingColumnWidth',
 ];
 
 import {arrayEach} from './helpers/array';
