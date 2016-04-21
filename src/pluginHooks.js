@@ -195,7 +195,6 @@ const REGISTERED_HOOKS = [
    */
   'afterIsMultipleSelectionCheck',
 
-
   /**
    * Callback fired before new data is loaded (by `loadData` method) into the data source array.
    *

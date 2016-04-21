@@ -433,7 +433,7 @@ class ManualRowMove extends BasePlugin {
 
       var shouldProcessMove = Handsontable.hooks.run(this.hot, 'beforeRowMove', priv.startRow, priv.endRow);
       if (!shouldProcessMove) {
-        priv.endRow = priv.startRow
+        priv.endRow = priv.startRow;
       }
 
       this.createPositionData(this.hot.countRows());

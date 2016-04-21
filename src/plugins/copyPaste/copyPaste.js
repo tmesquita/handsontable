@@ -224,7 +224,7 @@ function CopyPastePlugin(instance) {
       rangeEach(range.startCol, range.endCol, (column) => {
         if (copyableColumns.indexOf(column) === -1) {
           copyableColumns.push(column);
-          copyableColumnHeaders.push(columnHeaders[column])
+          copyableColumnHeaders.push(columnHeaders[column]);
         }
       });
     });
