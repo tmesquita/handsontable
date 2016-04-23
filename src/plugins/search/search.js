@@ -7,6 +7,84 @@ import {registerRenderer, getRenderer} from './../../renderers';
  * @plugin Search
  */
 Handsontable.Search = function Search(instance) {
+  this.queryNext = function(queryStr, callback, queryMethod, async_callback) {
+    var rowCount = instance.countRows();
+    var colCount = instance.countCols();
+    var queryResult = [];
+
+    if (!callback) {
+      callback = Handsontable.Search.global.getDefaultCallback();
+    }
+    if (!queryMethod) {
+      queryMethod = Handsontable.Search.global.getDefaultQueryMethod();
+    }
+
+    var selectedCells = instance.getSelected(),
+        startRow = 0,
+        startCol = 0,
+        processedRows = 0;
+
+    if (selectedCells && (selectedCells[0] || selectedCells[1])) {
+      startRow = selectedCells[0];
+      startCol = selectedCells[1] + 1;
+    }
+
+    function batchSearch(startRow, startCol, async_callback) {
+      var last_row = startRow;
+
+      for (var rowIndex = startRow; rowIndex < (startRow + 100) && processedRows < rowCount; rowIndex++) {
+        for (var colIndex = startCol; colIndex < colCount; colIndex++) {
+          var cellData = instance.getDataAtCell(rowIndex, colIndex);
+          var cellProperties = instance.getCellMeta(rowIndex, colIndex);
+          var cellCallback = cellProperties.search.callback || callback;
+          var cellQueryMethod = cellProperties.search.queryMethod || queryMethod;
+          var testResult = cellQueryMethod(queryStr, cellData);
+          if (testResult) {
+            var singleResult = {
+              row: rowIndex,
+              col: colIndex,
+              data: cellData
+            };
+            queryResult.push(singleResult);
+          }
+          // if (cellCallback) {
+          //   cellCallback(instance, rowIndex, colIndex, cellData, testResult);
+          // }
+          if (testResult) {
+            async_callback(queryResult[0]);
+            return;
+          }
+        }
+        startCol = 0;
+        processedRows++;
+        if (rowIndex == rowCount - 1) {
+          rowIndex = 0;
+        }
+        if (queryResult.length > 0) {
+          async_callback(queryResult);
+          return;
+        }
+        last_row = rowIndex + 1;
+      }
+
+      if (queryResult.length > 0) {
+        async_callback(queryResult);
+      } else if (!(processedRows < rowCount)) {
+        async_callback(undefined);
+      } else {
+        setTimeout(function() {
+          batchSearch(last_row, 0, async_callback);
+        }, 0);
+      }
+    };
+
+    setTimeout(function() {
+      batchSearch(startRow, startCol, async_callback);
+    }, 0);
+
+    return queryResult;
+  };
+
   this.query = function(queryStr, callback, queryMethod) {
     var rowCount = instance.countRows();
     var colCount = instance.countCols();
