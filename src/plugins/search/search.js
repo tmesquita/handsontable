@@ -7,36 +7,43 @@ import {registerRenderer, getRenderer} from './../../renderers';
  * @plugin Search
  */
 Handsontable.Search = function Search(instance) {
-  this.queryNext = function(queryStr, callback, queryMethod, async_callback) {
-    var rowCount = instance.countRows();
+  this.queryNext = function(queryStr, queryMethod, async_callback) {
+    var rowCount = instance.countRows() + 1; // +1 for column header row
     var colCount = instance.countCols();
     var queryResult = [];
 
-    if (!callback) {
-      callback = Handsontable.Search.global.getDefaultCallback();
-    }
     if (!queryMethod) {
       queryMethod = Handsontable.Search.global.getDefaultQueryMethod();
     }
 
     var selectedCells = instance.getSelected(),
-        startRow = 0,
+        startRow = -1,
         startCol = 0,
         processedRows = 0;
 
-    if (selectedCells && (selectedCells[0] || selectedCells[1])) {
-      startRow = selectedCells[0];
-      startCol = selectedCells[1] + 1;
+    if (selectedCells) {
+      if (selectedCells[0] == 0 && selectedCells[1] == selectedCells[3] && instance.countRows() == (selectedCells[2] + 1)){
+        startRow = -1;
+        startCol = selectedCells[1] + 1;
+      } else {
+        startRow = selectedCells[0];
+        startCol = selectedCells[1] + 1;
+      }
     }
 
     function batchSearch(startRow, startCol, async_callback) {
       var last_row = startRow;
-
-      for (var rowIndex = startRow; rowIndex < (startRow + 100) && processedRows < rowCount; rowIndex++) {
+      for (var rowIndex = startRow; rowIndex < (startRow + 100) && processedRows <= rowCount; rowIndex++) {
         for (var colIndex = startCol; colIndex < colCount; colIndex++) {
-          var cellData = instance.getDataAtCell(rowIndex, colIndex);
+          var cellData;
+
+          if (rowIndex < 0){
+            cellData = instance.getColHeader(colIndex);
+          } else {
+            cellData = instance.getDataAtCell(rowIndex, colIndex);
+          }
+
           var cellProperties = instance.getCellMeta(rowIndex, colIndex);
-          var cellCallback = cellProperties.search.callback || callback;
           var cellQueryMethod = cellProperties.search.queryMethod || queryMethod;
           var testResult = cellQueryMethod(queryStr, cellData);
           if (testResult) {
@@ -47,9 +54,7 @@ Handsontable.Search = function Search(instance) {
             };
             queryResult.push(singleResult);
           }
-          // if (cellCallback) {
-          //   cellCallback(instance, rowIndex, colIndex, cellData, testResult);
-          // }
+
           if (testResult) {
             async_callback(queryResult[0]);
             return;
@@ -57,8 +62,8 @@ Handsontable.Search = function Search(instance) {
         }
         startCol = 0;
         processedRows++;
-        if (rowIndex == rowCount - 1) {
-          rowIndex = 0;
+        if (rowIndex == rowCount - 2) {
+          rowIndex = -2;
         }
         if (queryResult.length > 0) {
           async_callback(queryResult);
@@ -69,7 +74,7 @@ Handsontable.Search = function Search(instance) {
 
       if (queryResult.length > 0) {
         async_callback(queryResult);
-      } else if (!(processedRows < rowCount)) {
+      } else if (processedRows > rowCount) {
         async_callback(undefined);
       } else {
         setTimeout(function() {
