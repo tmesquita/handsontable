@@ -87,12 +87,14 @@ AutocompleteEditor.prototype.open = function() {
     width: trimDropdown ? outerWidth(this.TEXTAREA) + getScrollbarWidth() + 2 : void 0,
     afterRenderer: function(TD, row, col, prop, value) {
       let caseSensitive = this.getCellMeta(row, col).filteringCaseSensitive === true;
-      let indexOfMatch;
+      let indexOfMatch = -1;
       let match;
       value = stringify(value);
 
       if (value) {
-        indexOfMatch = caseSensitive ? value.indexOf(this.query) : value.toLowerCase().indexOf(_this.query.toLowerCase());
+        if (_this.query){
+          indexOfMatch = caseSensitive ? value.indexOf(this.query) : value.toLowerCase().indexOf(_this.query.toLowerCase());
+        }
 
         if (indexOfMatch != -1) {
           match = value.substr(indexOfMatch, _this.query.length);
@@ -121,7 +123,7 @@ AutocompleteEditor.prototype.open = function() {
   }
 
   _this.instance._registerTimeout(setTimeout(function() {
-    _this.queryChoices(_this.TEXTAREA.value);
+    _this.queryChoices();
   }, 0));
 };
 
