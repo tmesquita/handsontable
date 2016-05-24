@@ -262,6 +262,11 @@ function EditorManager(instance, priv, selection) {
     }
     instance.view.wt.update('onCellDblClick', onDblClick);
 
+    function onOpen(event, coords, elem){
+      _this.openEditor();
+    }
+    instance.view.wt.update('onCellOpenClick', onOpen);
+
     instance.addHook('afterDestroy', function() {
       destroyed = true;
     });

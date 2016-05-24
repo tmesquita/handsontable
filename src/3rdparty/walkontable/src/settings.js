@@ -73,6 +73,7 @@ class WalkontableSettings {
 
       //    onCellMouseOut: null,
       onCellDblClick: null,
+      onCellOpenClick: null,
       onCellCornerMouseDown: null,
       onCellCornerDblClick: null,
       beforeDraw: null,
